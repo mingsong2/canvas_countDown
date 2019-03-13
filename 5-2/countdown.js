@@ -4,7 +4,7 @@ var RADIUS = 8;
 var MARGIN_TOP = 60;
 var MARGIN_LEFT = 30;
 
-const endTime = new Date(2014,6,11,18,47,52);
+const endTime = new Date(2019,2,11,13,47,52);
 var curShowTimeSeconds = 0
 
 var balls = [];
@@ -36,7 +36,9 @@ window.onload = function(){
         50
     );
 }
-
+/**
+ * 获取当前显示倒计时(时间戳)
+ */
 function getCurrentShowTimeSeconds() {
     var curTime = new Date();
     var ret = endTime.getTime() - curTime.getTime();
@@ -44,7 +46,10 @@ function getCurrentShowTimeSeconds() {
 
     return ret >= 0 ? ret : 0;
 }
-
+/**
+ * 1.更新时钟
+ * 2.更新彩色小球
+ */
 function update(){
 
     var nextShowTimeSeconds = getCurrentShowTimeSeconds();
@@ -86,7 +91,9 @@ function update(){
 
     console.log( balls.length)
 }
-
+/**
+ * 更新彩色小球(1.更新小球的运动 2.运动超出画面时,删掉小球)
+ */
 function updateBalls(){
 
     for( var i = 0 ; i < balls.length ; i ++ ){
@@ -110,7 +117,12 @@ function updateBalls(){
         balls.pop();
     }
 }
-
+/**
+ * 添加彩色小球(根据当前传递过来的数字来生成)
+ * @param {*} x 
+ * @param {*} y 
+ * @param {*} num 
+ */
 function addBalls( x , y , num ){
 
     for( var i = 0  ; i < digit[num].length ; i ++ )
@@ -128,7 +140,12 @@ function addBalls( x , y , num ){
                 balls.push( aBall )
             }
 }
-
+/**
+ * 生成图像
+ * 1.绘制数字
+ * 2.绘制彩色小球
+ * @param {*} cxt 
+ */
 function render( cxt ){
 
     cxt.clearRect(0,0,WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -156,7 +173,13 @@ function render( cxt ){
         cxt.fill();
     }
 }
-
+/**
+ * 绘制数字
+ * @param {*} x 
+ * @param {*} y 
+ * @param {*} num 
+ * @param {*} cxt 
+ */
 function renderDigit( x , y , num , cxt ){
 
     cxt.fillStyle = "rgb(0,102,153)";
